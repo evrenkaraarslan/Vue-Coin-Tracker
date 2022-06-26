@@ -3,7 +3,8 @@
 .buttonDetails {
     width: 200px;
     height: 40px;
-    background: yellow;
+    background: #7bc464;
+    border-radius: 8px;
     color: black;
 }
 
@@ -23,7 +24,7 @@
 }
 
 .card-text {
-    border: 1px solid springgreen;
+    border: 1px solid #6ae6b4;
     width: 40%;
     padding: 10px;
     border-radius: 10px;
@@ -32,7 +33,7 @@
 
 .card-text:hover {
     color: white;
-    background: springgreen;
+    background: #6ae6b4;
     cursor: pointer;
 }
 

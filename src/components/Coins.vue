@@ -5,20 +5,21 @@
     margin-bottom: 10px;
 } 
 .mainDiv {
-    display: flex;
-    justify-content: space-between;
-    align-items: space-between;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 15px;
     margin: 20px;
 }
 
 .card {
-    width: 50%;
+    width: 100%;
 }
 
 .card-body {
     padding: 40px;
-    border: 1px solid;
+    border: 1px solid #dbb7b7;
+    border-radius: 20px;
 }
 
 .card-title {
@@ -28,19 +29,22 @@
 .buttonDetails {
     width: 50%;
     height: 40px;
-    background: yellow;
+    background: #7bc464;
     color: black;
+    border-radius: 8px;
+    border: 0;
+    transition: 0.5s ease-in-out;
 }
 
 .buttonDetails:hover {
     cursor: pointer;
+    border-radius: 20%;
 }
 
 
 @media only screen and (max-width: 600px) {
   .mainDiv {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;
   }
 
   .card {

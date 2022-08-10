@@ -1,12 +1,9 @@
-import Vue from 'vue'
-import Router from 'vue-router'
 import Coins from './components/Coins.vue'
 import CoinDetails from './components/CoinDetails.vue'
+import {createRouter, createWebHistory} from 'vue-router'  
 
-Vue.use(Router)
 
-const router =  new Router({
-  routes: [
+const routes = [
     {
       path: '/',
       redirect: '/coins'
@@ -21,6 +18,10 @@ const router =  new Router({
       name: 'coindetails',
       component: CoinDetails
     }
-  ]
+]
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes
 })
+
 export default router

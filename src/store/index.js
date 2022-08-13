@@ -1,17 +1,14 @@
 import { createStore } from 'vuex'
 
 export default createStore({
-state: {
-    firstName: 'Evren',
-    lastName: 'Karaarslan'
+  state () {
+    return {
+      count: 10
+    }
   },
-mutations: {
-
-},
-actions: {
-
-},
-getters: {
-
-}
+  mutations: {
+    increment (state) {
+      state.count++
+    }
+  }
 })

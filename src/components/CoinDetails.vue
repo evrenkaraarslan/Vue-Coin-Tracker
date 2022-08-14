@@ -1,29 +1,30 @@
 <style scoped> 
 
-.buttonDetails {
+.buttonDown {
     width: 200px;
     height: 40px;
+    margin: 5px;
     background: #7bc464;
     border-radius: 8px;
     color: black;
 }
 
-.buttonDetails:hover {
+.buttonDown:hover {
     cursor: pointer;
 }
 
-.card-body {
+.cardBody {
     display: flex;
     flex-flow: column;
     align-items: center;
     margin-bottom: 120px;
 }
 
-.card-title {
+.cardTitle {
     text-transform: capitalize;
 }
 
-.card-text {
+.cardText {
     border: 1px solid #6ae6b4;
     width: 40%;
     padding: 10px;
@@ -31,7 +32,7 @@
     font-size: 20px;
 }
 
-.card-text:hover {
+.cardText:hover {
     color: white;
     background: #6ae6b4;
     cursor: pointer;
@@ -45,8 +46,14 @@
     justify-content: space-evenly;
 }
 
+.buttonsDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 @media only screen and (max-width: 600px) { 
-    .card-text { 
+    .cardText { 
         width: 90%;
     }
 }
@@ -54,24 +61,23 @@
 
 <template>
 
-<div class="home"> 
-    <div class="card" v-for="coin in coinDetails" :key="coin.id"> 
-        <div class="card-body" v-if="coin.id == routeTest">
-            <h1 class="card-title">{{coin.slug}}</h1>
+<div> 
+        <div class="cardBody" v-if='coinDetails.market_data'>
+            <h1 class="cardTitle">{{coinDetails.slug}}</h1>
             <div class="descriptionsWrapper"> 
-                <p class="card-text">Symbol : {{coin.symbol}}</p> 
-                <p class="card-text">Price : {{coin.metrics.market_data.price_usd}}</p>
-                <p class="card-text">Btc price : {{coin.metrics.market_data.price_btc}}</p>
-                <p class="card-text">Eth price : {{coin.metrics.market_data.price_eth}}</p>
-                <p class="card-text">Last 24 hours volume : {{coin.metrics.market_data.volume_last_24_hours}}</p>
-                <p class="card-text">Real volume last 24 hours: {{coin.metrics.market_data.real_volume_last_24_hours}}</p>
-                <p class="card-text">Rank in market: {{coin.metrics.marketcap.rank}}</p>
-            </div> 
-            <button v-on:click="goToMainPage()" class="buttonDetails">Go Back</button>
+                <p class="cardText">Symbol : {{coinDetails.symbol}}</p> 
+                <p class="cardText">Price : {{coinDetails.market_data.price_usd}}</p>
+                <p class="cardText">Btc price : {{coinDetails.market_data.price_btc}}</p>
+                <p class="cardText">Eth price : {{coinDetails.market_data.price_eth}}</p>
+                <p class="cardText">Last 24 hours volume : {{coinDetails.market_data.volume_last_24_hours}}</p>
+                <p class="cardText">Real volume last 24 hours: {{coinDetails.market_data.real_volume_last_24_hours}}</p>
+                <p class="cardText">Rank in market: {{coinDetails.marketcap.rank}}</p>
+            </div>
+            <div class="buttonsDiv">
+                <button v-on:click="goToMainPage()" class="buttonDown">Go Back</button>
+                <button v-on:click="addCoin()" class="buttonDown">Add to box</button>
+            </div>
         </div>
-    </div>
-
-
 </div>
 
 </template>
@@ -87,7 +93,7 @@ export default {
         this.routeTest = this.$route.params.id
         axios({
             method: "GET",
-            "url": "https://data.messari.io/api/v1/assets" 
+            "url": `https://data.messari.io/api/v1/assets/${this.$route.params.id}/metrics`
         }).then(response => {
             this.coinDetails = response.data.data; 
         }, error => {
@@ -103,6 +109,18 @@ export default {
     methods: {
         goToMainPage: function() {
             this.$router.push("/coins");
+        },
+        addCoin: function() {
+            if(!this.$store.state.storedCoins.some((coin) => coin.id === this.coinDetails.id)) {
+                this.$store.commit('addCoin',this.coinDetails)
+            } else {
+                alert('This coin already exists in your box')
+            }
+        } 
+    },
+    computed: {
+        storedCoins () {
+            return this.$store.state.storedCoins
         }
     }
 }

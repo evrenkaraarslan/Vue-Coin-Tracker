@@ -3,9 +3,10 @@
 ## What is the use of this Repo [![Generic badge](https://img.shields.io/badge/What-VueJS-blue.svg)](https://vuejs.org/v2/guide/)
 
 This Repo demonstrates the use of the following in vuejs
-1. Vue-router
-2. Components interaction 
-3. Axios 
+1. Vuex
+2. Vue-router
+3. Components interaction 
+4. Axios 
 
 ## Application Live URL [![Generic badge](https://img.shields.io/badge/Deployed-Success-green.svg)](http://evrencoin.surge.sh/)
 

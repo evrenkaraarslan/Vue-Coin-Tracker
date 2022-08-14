@@ -7,9 +7,9 @@ state: {
 mutations: {
     addCoin: (state, payload) => {
       state.storedCoins.push(payload)
-},
+    },
 		removeCoin(state, payload) {
 			state.storedCoins.splice(state.storedCoins.indexOf(payload), 1)
 		}
-}
+  }
 })

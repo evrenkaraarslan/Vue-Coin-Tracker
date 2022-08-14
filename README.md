@@ -51,3 +51,5 @@ The Application has 2 endpoints
 **/coins** : The ties to *Coins* View
 
 **/coindetails** : This ties to *CoinDetails* View 
+
+**/mycoins** : This ties to *MyCoins* View which shows coins in Vuex store

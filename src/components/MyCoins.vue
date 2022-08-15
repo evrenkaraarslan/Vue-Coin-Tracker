@@ -43,6 +43,15 @@
     margin: 4px;
 }
 
+.availableAmount {
+    padding: 2px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 6px;
+    color: green;
+}
+
 .cardText:hover {
     color: white;
     background: #6ae6b4;
@@ -87,6 +96,7 @@
                         <p class="cardText">Last 24 hours volume : {{coinDetails.market_data.volume_last_24_hours}}</p>
                         <p class="cardText">Real volume last 24 hours: {{coinDetails.market_data.real_volume_last_24_hours}}</p>
                         <p class="cardText">Rank in market: {{coinDetails.marketcap.rank}}</p>
+                        <p class="availableAmount">Available amount {{coinDetails.amount}}</p>
                     </div> 
                     <p>{{ count }}</p>
                     <button v-on:click="removeCoin(coinDetails)" class="buttonDetails">Remove</button>

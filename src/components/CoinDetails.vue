@@ -1,8 +1,8 @@
 <style scoped> 
 
 .buttonDown {
-    width: 200px;
-    height: 40px;
+    width: 120px;
+    height: 20px;
     margin: 5px;
     background: #7bc464;
     border-radius: 8px;
@@ -50,11 +50,25 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.inputDiv {
+    height: 20px;
 }
 
 @media only screen and (max-width: 600px) { 
     .cardText { 
         width: 90%;
+    }
+
+    .buttonsDiv {
+        flex-direction: column;
+        margin-top: 4px;
+    }
+    
+    .buttonDown, .inputDiv, .inputAmount {
+        width: 100%;
     }
 }
 </style>
@@ -74,8 +88,11 @@
                 <p class="cardText">Rank in market: {{coinDetails.marketcap.rank}}</p>
             </div>
             <div class="buttonsDiv">
-                <button v-on:click="goToMainPage()" class="buttonDown">Go Back</button>
+                <div class="inputDiv">
+                    <input class='inputAmount' type="number" :value="amount" @input="event => amount = event.target.value">
+                </div>
                 <button v-on:click="addCoin()" class="buttonDown">Add to box</button>
+                <button v-on:click="goToMainPage()" class="buttonDown">Go Back</button>
             </div>
         </div>
 </div>
@@ -86,9 +103,11 @@
 
 // @ is an alias to /src
 import axios from 'axios'
+import { numberMixin } from '../mixins/index.js'
 
 export default {
     name: 'coindetails',
+    mixins: [numberMixin],
     mounted() {
         this.routeTest = this.$route.params.id
         axios({
@@ -103,7 +122,8 @@ export default {
     data() {
         return {
             coinDetails: {},
-            routeTest: ""
+            routeTest: "",
+            amount: null
         }
     },
     methods: {
@@ -111,9 +131,12 @@ export default {
             this.$router.push("/coins");
         },
         addCoin: function() {
-            if(!this.$store.state.storedCoins.some((coin) => coin.id === this.coinDetails.id)) {
-                this.$store.commit('addCoin',this.coinDetails)
-            } else {
+            if (this.amount === 0 || !this.checkNumber(this.amount)) {
+                alert('Please insert a valid amount')
+            } else if(!this.$store.state.storedCoins.some((coin) => coin.id === this.coinDetails.id)) {
+                this.$store.commit('addCoin',{...this.coinDetails, amount: this.amount})
+            }
+             else {
                 alert('This coin already exists in your box')
             }
         } 

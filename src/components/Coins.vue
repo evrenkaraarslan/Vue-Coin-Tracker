@@ -62,10 +62,10 @@
 <div class="home"> 
     <div class="mainDiv"> 
         <div class="card" v-for="coin in coinlist" :key="coin.id">
-            <div class="card-body" v-on:click="setSelectedCoin(coin.name)">
+            <div class="card-body" @click="setSelectedCoin(coin.name)">
                 <h2 class="card-title">{{coin.slug}}</h2>
                 <p class="card-text">{{coin.symbol}}</p> 
-                <button class="buttonDetails" v-on:click="goToDetailsPage(coin.id)">Details</button>
+                <button class="buttonDetails" @click="goToDetailsPage(coin.id)">Details</button>
             </div>
         </div>
     </div> 

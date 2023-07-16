@@ -83,7 +83,7 @@
 
         <div v-if='storedCoins.length == 0'>
             <p>No coins added to bank</p>
-            <button v-on:click="goToMainPage()" class="buttonDetails">Go Back</button>
+            <button @click="goToMainPage()" class="buttonDetails">Go Back</button>
         </div>
         <div v-for='coinDetails in storedCoins' :key="coinDetails.id"> 
                 <div class="cardBody" v-if='coinDetails.market_data'>
@@ -99,7 +99,7 @@
                         <p class="availableAmount">Available amount {{coinDetails.amount}}</p>
                     </div> 
                     <p>{{ count }}</p>
-                    <button v-on:click="removeCoin(coinDetails)" class="buttonDetails">Remove</button>
+                    <button @click="removeCoin(coinDetails)" class="buttonDetails">Remove</button>
                 </div>
         </div>
 

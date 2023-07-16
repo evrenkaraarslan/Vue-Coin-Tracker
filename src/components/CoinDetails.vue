@@ -91,8 +91,8 @@
                 <div class="inputDiv">
                     <input class='inputAmount' type="number" :value="amount" @input="event => amount = event.target.value">
                 </div>
-                <button v-on:click="addCoin()" class="buttonDown">Add to box</button>
-                <button v-on:click="goToMainPage()" class="buttonDown">Go Back</button>
+                <button @click="addCoin()" class="buttonDown">Add to box</button>
+                <button @click="goToMainPage()" class="buttonDown">Go Back</button>
             </div>
         </div>
 </div>
